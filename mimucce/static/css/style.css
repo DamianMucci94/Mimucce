@@ -1,0 +1,27 @@
+/**primero siempre las utilites*/
+/*segundo las bases**/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+@font-face {
+  font-family: "Marca";
+  src: url("../../../assets/font/Vogue.ttf"); }
+
+@font-face {
+  font-family: "Letra";
+  src: url("../../../assets/font/Garet-Book.ttf"); }
+
+/* los layouts**/
+header {
+  display: grid; }
+
+header h1 {
+  font-family: "Marca"; }
+
+.navbar button {
+  font-family: "Letra"; }
+
+/**componentes**/
+/* mediaquery**/

@@ -1,0 +1,18 @@
+/**primero siempre las utilites*/
+
+/*segundo las bases**/
+@import "./base/resets";
+@import "./base/fonts";
+
+/* los layouts**/
+
+@import "./layout/header";
+
+/**componentes**/
+
+
+/* mediaquery**/
+
+@media(max-width:1150px){
+
+}
