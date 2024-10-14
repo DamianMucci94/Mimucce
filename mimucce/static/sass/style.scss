@@ -7,12 +7,35 @@
 /* los layouts**/
 
 @import "./layout/header";
+@import "./layout/footer";
+@import "./layout/main-index";
 
 /**componentes**/
 
+@import "./components/card";
 
 /* mediaquery**/
 
-@media(max-width:1150px){
-
+@media(max-width:1800px){
+    header{
+        display: grid;
+        grid-template-columns: repeat(5,1fr);
+        grid-template-rows: repeat(2,1fr);
+    
+        h1{
+            grid-column: 2/3;
+            grid-row: 1/2;
+        }
+        .dropdown{
+            grid-column: 1/2;
+            grid-row: 2/3;
+        }
+        .navbar{
+            grid-column: 5/6;
+            grid-row: 2/3;
+        }
+    }
+    main{
+        
+    }
 }
