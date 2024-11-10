@@ -11,9 +11,11 @@
 <body>
     <header>
         <h1>
-            {% block header %}
+            <a href="{% url 'core:index' %}">
+                {% block header %}
             
-            {% endblock header %}
+                {% endblock header %}
+            </a>
         </h1>
         {% include 'core/componentes/navbar.html' %}
     </header>

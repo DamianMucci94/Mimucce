@@ -1,0 +1,20 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block header %}
+    MIMUCCE - Confirmación de Pago
+{% endblock header %}
+
+{% block main %}
+    <h1>Confirmación de Pago</h1>
+    <p>Por favor, confirma tu pedido antes de continuar con el pago.</p>
+    <p>Total: {{ order.total_price }}</p>
+    <form action="{% url 'pedidos:payment_success_page' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Confirmar y Pagar</button>
+    </form>
+    <form action="{% url 'pedidos:payment_cancel_page' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Cancelar</button>
+    </form>
+{% endblock main %}

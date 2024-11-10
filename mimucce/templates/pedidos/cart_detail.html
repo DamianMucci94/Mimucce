@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block header %}
+    MIMUCCE - Carrito de Compras
+{% endblock header %}
+
+{% block main %}
+    <h1>Tu Carrito</h1>
+    <table>
+        <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Total</th>
+        </tr>
+        {% for order in orders %}
+            <tr>
+                <td>{{ order.product.name }}</td>
+                <td>{{ order.quantity }}</td>
+                <td>{{ order.product.price }}</td>
+                <td>{{ order.total_price }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <p>Total: {{ orders|sum:"total_price" }}</p>
+    <a href="{% url 'pedidos:checkout_page' %}">Proceder al pago</a>
+{% endblock main %}

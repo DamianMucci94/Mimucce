@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block header %}
+    MIMUCCE
+{% endblock header %}
+
+{% block main %}
+<div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="..." class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">{{ product.description }}</p>
+                <p class="card-text"><strong>Precio: ${{ product.price }}</strong></p>
+                <button class="btn btn-primary">Comprar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main %}

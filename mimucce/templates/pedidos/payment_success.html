@@ -1,0 +1,12 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block header %}
+    MIMUCCE - Pago Exitoso
+{% endblock header %}
+
+{% block main %}
+    <h1>Pago Completado</h1>
+    <p>Gracias por tu compra. Tu pedido ha sido confirmado.</p>
+    <a href="{% url 'productos:lista_productos' %}">Seguir comprando</a>
+{% endblock main %}

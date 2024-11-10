@@ -24,6 +24,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
+    path('productos/', include('productos.urls')),
+    path('pedidos/', include('pedidos.urls')),
 ]
 
 if settings.DEBUG:

@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block header %}
+    MIMUCCE - Añadido al Carrito
+{% endblock header %}
+
+{% block main %}
+    <h1>Producto añadido al carrito</h1>
+    <p>El producto ha sido añadido a tu carrito.</p>
+    <a href="{% url 'pedidos:cart_detail' %}">Ver carrito</a> |
+    <a href="{% url 'productos:lista_productos' %}">Seguir comprando</a>
+{% endblock main %}
