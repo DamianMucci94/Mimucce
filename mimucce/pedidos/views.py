@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import FormView, TemplateView, ListView
 from .forms import PaymentForm
 from .models import Order
-from ..productos.models import Product
+from productos.models import Product
 from django.urls import reverse
 
 class AddToCartView(TemplateView):
