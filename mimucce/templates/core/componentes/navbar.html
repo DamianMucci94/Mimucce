@@ -1,21 +1,35 @@
 {% load static %}
 
-<div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Menu
-    </button>
-    <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="{% url 'productos:lista_productos_categoria' 'vestido' %}">Vestidos</a></li>
-        <li><a class="dropdown-item" href="{% url 'productos:lista_productos_categoria' 'pantalon' %}">Pantalones</a></li>
-        <li><a class="dropdown-item" href="{% url 'productos:lista_productos_categoria' 'calzado' %}">Canzados</a></li>
-        <li><a class="dropdown-item" href="{% url 'productos:lista_productos' %}">Todos los Productos</a></li>
-    </ul>
-</div>
-<nav class="navbar bg-body-tertiary">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <form class="d-flex" action="{% url 'productos:lista_productos' %}" method="get">
-            <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Buscar</button>
-        </form>
+        <!-- Menu a la izquierda (Opcional) -->
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Menu
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'productos:lista_productos_categoria' 'vestido' %}">Vestidos</a></li>
+                <li><a class="dropdown-item" href="{% url 'productos:lista_productos_categoria' 'pantalon' %}">Pantalones</a></li>
+                <li><a class="dropdown-item" href="{% url 'productos:lista_productos_categoria' 'calzado' %}">Canzados</a></li>
+                <li><a class="dropdown-item" href="{% url 'productos:lista_productos' %}">Todos los Productos</a></li>
+            </ul>
+        </div>
+
+        <!-- Buscador centrado -->
+        <div class="d-flex justify-content-center w-100">
+            <form class="d-flex" action="{% url 'productos:lista_productos' %}" method="get">
+                <input class="form-control me-2" type="search" name="q" placeholder="Buscar" aria-label="Buscar">
+                <button class="btn btn-outline-success" type="submit">Buscar</button>
+            </form>
+        </div>
+
+        <!-- Contenido a la derecha -->
+        <div class="ms-auto">
+            {% block content %}
+            <!-- Aquí puedes colocar más elementos a la derecha si es necesario -->
+            {% endblock content %}
+        </div>
     </div>
 </nav>
+
+

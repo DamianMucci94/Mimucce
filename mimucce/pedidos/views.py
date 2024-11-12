@@ -1,11 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import FormView, TemplateView, ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import PaymentForm
 from .models import Order
 from productos.models import Product
 from django.urls import reverse
 
-class AddToCartView(TemplateView):
+class AddToCartView(LoginRequiredMixin, TemplateView):
     template_name = 'add_to_cart.html'  # Plantilla de confirmación de agregado al carrito
     
     def post(self, request, product_id):
@@ -25,7 +26,7 @@ class AddToCartView(TemplateView):
         
         return redirect('payment:cart_detail')
 
-class CartDetailView(ListView):
+class CartDetailView(LoginRequiredMixin, ListView):
     model = Order
     template_name = 'cart_detail.html'
     context_object_name = 'orders'
@@ -33,7 +34,7 @@ class CartDetailView(ListView):
     def get_queryset(self):
         return Order.objects.filter(user=self.request.user, status='Pending')
     
-class CheckoutView(FormView):
+class CheckoutView(LoginRequiredMixin, FormView):
     template_name = 'checkout.html'
     form_class = PaymentForm
     success_url = '/payment/success/'  # URL para cuando el pago sea exitoso
@@ -47,8 +48,8 @@ class CheckoutView(FormView):
         except Exception as e:  # Captura de errores de pago
             return redirect('pedidos:payment_cancel_page')  # Redirige a página de cancelación
 
-class PaymentSuccessView(TemplateView):
+class PaymentSuccessView(LoginRequiredMixin, TemplateView):
     template_name = 'payment_success.html'  # Ruta a tu plantilla de éxito
 
-class PaymentCancelView(TemplateView):
+class PaymentCancelView(LoginRequiredMixin, TemplateView):
     template_name = 'payment_cancel.html'  # Ruta a tu plantilla de cancelación
