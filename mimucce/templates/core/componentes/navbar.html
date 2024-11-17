@@ -23,13 +23,16 @@
             </form>
         </div>
 
-        <!-- Contenido a la derecha -->
-        <div class="ms-auto">
-            {% block content %}
-            <!-- Aquí puedes colocar más elementos a la derecha si es necesario -->
-            {% endblock content %}
+        <!-- Login (u otros elementos) a la derecha -->
+        <div class="col-auto">
+            {% if user.is_authenticated %}
+                <!-- Si el usuario está autenticado, mostramos su nombre -->
+                <p>{{ user.username }}</p>
+                <a href="{% url 'core:logout' %}">Cerrar sesión</a>
+            {% else %}
+            <a href="{% url 'core:login' %}">Ingresar</a>
+            <a href="{% url 'core:register' %}">Registrarse</a>
+            {% endif %}
         </div>
     </div>
 </nav>
-
-
