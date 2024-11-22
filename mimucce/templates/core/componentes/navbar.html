@@ -2,15 +2,15 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <!-- Menu a la izquierda (Opcional) -->
+        <!-- Menú a la izquierda -->
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Menu
+                Menú
             </button>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="{% url 'productos:lista_productos_categoria' 'vestido' %}">Vestidos</a></li>
                 <li><a class="dropdown-item" href="{% url 'productos:lista_productos_categoria' 'pantalon' %}">Pantalones</a></li>
-                <li><a class="dropdown-item" href="{% url 'productos:lista_productos_categoria' 'calzado' %}">Canzados</a></li>
+                <li><a class="dropdown-item" href="{% url 'productos:lista_productos_categoria' 'calzado' %}">Calzados</a></li>
                 <li><a class="dropdown-item" href="{% url 'productos:lista_productos' %}">Todos los Productos</a></li>
             </ul>
         </div>
@@ -23,15 +23,16 @@
             </form>
         </div>
 
-        <!-- Login (u otros elementos) a la derecha -->
-        <div class="col-auto">
+        <!-- Login o perfil a la derecha -->
+        <div class="d-flex align-items-center">
             {% if user.is_authenticated %}
-                <!-- Si el usuario está autenticado, mostramos su nombre -->
-                <p>{{ user.username }}</p>
-                <a href="{% url 'core:logout' %}">Cerrar sesión</a>
+                <span class="navbar-text me-3">
+                    Hola, <strong>{{ user.username }}</strong>
+                </span>
+                <a href="{% url 'core:logout' %}" class="btn btn-outline-danger btn-sm">Cerrar sesión</a>
             {% else %}
-            <a href="{% url 'core:login' %}">Ingresar</a>
-            <a href="{% url 'core:register' %}">Registrarse</a>
+                <a href="{% url 'core:login' %}" class="btn btn-outline-primary btn-sm me-2">Ingresar</a>
+                <a href="{% url 'core:register' %}" class="btn btn-outline-success btn-sm">Registrarse</a>
             {% endif %}
         </div>
     </div>

@@ -9,31 +9,28 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <h2>Iniciar sesión</h2>
-
-    {% if user.is_authenticated %}
-        <!-- Si el usuario está autenticado, mostramos su nombre -->
-        <p>Hola {{ user.username }}</p>
-        <a href="{% url 'core:logout' %}">Cerrar sesión</a>
-    {% else %}
-        <!-- Si no está autenticado, mostramos el formulario de login -->
-        <form action="{% url 'core:login' %}" method="post">
-        {% csrf_token %}
-        <div>
-            <label for="id_username">Usuario</label>
-            <input type="text" name="username" id="id_username" required>
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="card p-4 shadow-lg" style="max-width: 400px; width: 100%;">
+            <h2 class="text-center mb-4">Iniciar sesión</h2>
+                <form action="{% url 'core:login' %}" method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="id_username" class="form-label">Usuario</label>
+                        <input type="text" name="username" id="id_username" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_password" class="form-label">Contraseña</label>
+                        <input type="password" name="password" id="id_password" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
+                </form>
+                {% if form.errors %}
+                    <div class="alert alert-danger mt-3">
+                        Hubo un error en el inicio de sesión. Por favor, verifica tus datos.
+                    </div>
+                {% endif %}
         </div>
-        <div>
-            <label for="id_password">Contraseña</label>
-            <input type="password" name="password" id="id_password" required>
-        </div>
-        <button type="submit">Iniciar sesión</button>
-        </form>
-    
-        {% if form.errors %}
-        <p style="color: red;">Hubo un error en el inicio de sesión.</p>
-        {% endif %}
-    {% endif %}
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

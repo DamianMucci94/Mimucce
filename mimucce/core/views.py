@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView, LogoutView
 from productos.models import Product
 
@@ -10,6 +11,9 @@ def index(request):
 
 class CustomLoginView(LoginView):
     template_name = 'core/login.html'  # Ruta a tu plantilla personalizada
+
+    def get_success_url(self):
+        return reverse_lazy('core:index')  # Redirige a la página de inicio
 
 class CustomLogoutView(LogoutView):
     template_name = 'core/logout.html'  # Ruta a tu plantilla personalizada
