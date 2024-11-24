@@ -24,7 +24,7 @@ class AddToCartView(LoginRequiredMixin, TemplateView):
             order.total_price = order.quantity * product.price
             order.save()
         
-        return redirect('payment:cart_detail')
+        return redirect('pedidos:cart_detail')
 
 class CartDetailView(LoginRequiredMixin, ListView):
     model = Order
