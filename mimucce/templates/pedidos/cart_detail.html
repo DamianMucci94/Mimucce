@@ -23,6 +23,6 @@
             </tr>
         {% endfor %}
     </table>
-    <p>Total: {{ orders|sum:"total_price" }}</p>
+    <p><strong>Total: </strong>{{ total }}</p>
     <a href="{% url 'pedidos:checkout_page' %}">Proceder al pago</a>
 {% endblock main %}

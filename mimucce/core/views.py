@@ -16,8 +16,8 @@ class CustomLoginView(LoginView):
         return reverse_lazy('core:index')  # Redirige a la página de inicio
 
 class CustomLogoutView(LogoutView):
-    template_name = 'core/logout.html'  # Ruta a tu plantilla personalizada
-
+    next_page = reverse_lazy('core:index')  # Redirige al inicio después de cerrar sesión
+    
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)

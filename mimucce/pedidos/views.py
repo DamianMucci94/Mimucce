@@ -5,6 +5,8 @@ from .forms import PaymentForm
 from .models import Order
 from productos.models import Product
 from django.urls import reverse
+from django.http import HttpResponse
+
 
 class AddToCartView(LoginRequiredMixin, TemplateView):
     template_name = 'add_to_cart.html'  # Plantilla de confirmación de agregado al carrito
@@ -28,14 +30,23 @@ class AddToCartView(LoginRequiredMixin, TemplateView):
 
 class CartDetailView(LoginRequiredMixin, ListView):
     model = Order
-    template_name = 'cart_detail.html'
+    template_name = 'pedidos/cart_detail.html'
     context_object_name = 'orders'
     
     def get_queryset(self):
         return Order.objects.filter(user=self.request.user, status='Pending')
     
+    def get_context_data(self, **kwargs):
+        # Obtener el contexto de la vista
+        context = super().get_context_data(**kwargs)
+        # Calcular el precio total
+        total = sum(order.total_price for order in context['orders'])
+        # Agregar el total al contexto
+        context['total'] = total
+        return context
+    
 class CheckoutView(LoginRequiredMixin, FormView):
-    template_name = 'checkout.html'
+    template_name = 'pedidos/checkout.html'
     form_class = PaymentForm
     success_url = '/payment/success/'  # URL para cuando el pago sea exitoso
 
@@ -49,7 +60,15 @@ class CheckoutView(LoginRequiredMixin, FormView):
             return redirect('pedidos:payment_cancel_page')  # Redirige a página de cancelación
 
 class PaymentSuccessView(LoginRequiredMixin, TemplateView):
-    template_name = 'payment_success.html'  # Ruta a tu plantilla de éxito
+    template_name = 'pedidos/payment_success.html'
+
+    def post(self, request, *args, **kwargs):
+        # Lógica para manejar el pago exitoso, por ejemplo, actualizar el estado de la orden
+        return HttpResponse("Pago exitoso")
 
 class PaymentCancelView(LoginRequiredMixin, TemplateView):
-    template_name = 'payment_cancel.html'  # Ruta a tu plantilla de cancelación
+    template_name = 'pedidos/payment_cancel.html'
+
+    def post(self, request, *args, **kwargs):
+        # Lógica para manejar la cancelación del pago
+        return HttpResponse("Pago cancelado")
