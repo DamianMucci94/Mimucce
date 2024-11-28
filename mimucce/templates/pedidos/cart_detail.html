@@ -6,23 +6,27 @@
 {% endblock header %}
 
 {% block main %}
-    <h1>Tu Carrito</h1>
-    <table>
-        <tr>
-            <th>Producto</th>
-            <th>Cantidad</th>
-            <th>Precio</th>
-            <th>Total</th>
-        </tr>
-        {% for order in orders %}
+    <h1 class="my-4">Tu Carrito</h1>
+    <table class="table table-striped table-bordered">
+        <thead>
             <tr>
-                <td>{{ order.product.name }}</td>
-                <td>{{ order.quantity }}</td>
-                <td>{{ order.product.price }}</td>
-                <td>{{ order.total_price }}</td>
+                <th class="text-start">Producto</th>
+                <th class="text-center">Cantidad</th>
+                <th class="text-end">Precio</th>
+                <th class="text-end">Total</th>
             </tr>
-        {% endfor %}
+        </thead>
+        <tbody>
+            {% for order in orders %}
+                <tr>
+                    <td class="text-start">{{ order.product.name }}</td>
+                    <td class="text-center">{{ order.quantity }}</td>
+                    <td class="text-end">{{ order.product.price }}</td>
+                    <td class="text-end">{{ order.total_price }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
     </table>
-    <p><strong>Total: </strong>{{ total }}</p>
-    <a href="{% url 'pedidos:checkout_page' %}">Proceder al pago</a>
+    <p class="text-end"><strong>Total: </strong>{{ total }}</p>
+    <a href="{% url 'pedidos:checkout_page' %}" class="btn btn-primary">Proceder al pago</a>
 {% endblock main %}
