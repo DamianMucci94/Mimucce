@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.views.generic.edit import FormView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.urls import reverse_lazy
@@ -18,15 +19,16 @@ class CustomLoginView(LoginView):
 class CustomLogoutView(LogoutView):
     next_page = reverse_lazy('core:index')  # Redirige al inicio después de cerrar sesión
     
-def register(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Tu cuenta ha sido creada exitosamente. Ahora puedes iniciar sesión.')
-            return redirect('core:login')
-        else:
-            messages.error(request, 'Corrige los errores a continuación.')
-    else:
-        form = UserCreationForm()
-    return render(request, 'core/register.html', {'form': form})
+class RegisterView(FormView):
+    template_name = 'core/register.html'  # Ruta a tu plantilla personalizada
+    form_class = UserCreationForm  # Formulario que se utilizará
+    success_url = reverse_lazy('core:login')  # Redirige al login después del registro
+
+    def form_valid(self, form):
+        form.save()  # Guarda al nuevo usuario
+        messages.success(self.request, 'Tu cuenta ha sido creada exitosamente. Ahora puedes iniciar sesión.')
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, 'Corrige los errores a continuación.')
+        return super().form_invalid(form)
