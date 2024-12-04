@@ -20,18 +20,54 @@
     header{
         display: grid;
         grid-template-columns: repeat(5,1fr);
-        grid-template-rows: repeat(2,1fr);
+        grid-template-rows: repeat(2,auto); /* Cambia el tamaño de la fila del navbar dinámicamente */
     
         h1{
+            height: 5vh;
             grid-column: 2/3;
             grid-row: 1/2;
         }
         .navbar{
             grid-column: 1/6;
             grid-row: 2/3;
+            width: 100%; /* Asegura que el navbar ocupe todo el ancho */
         }
     }
     main{
         
+    }
+}
+
+@media (max-width: 975px) {
+}
+
+@media (max-width: 768px) {
+    header {
+        h1{
+        font-size: 1.5rem;
+        text-align: center;
+        }
+    }
+}
+
+@media (max-width: 610px) {
+    .buscador{
+        width: 35%
+    }
+}
+
+@media (max-width: 470px) {
+    nav{
+        .container-fluid{
+            button{
+                font-size: 8px;
+            }
+            span{
+                font-size: 8px;
+            }
+            a{
+                font-size: 8px;
+            }
+        }
     }
 }

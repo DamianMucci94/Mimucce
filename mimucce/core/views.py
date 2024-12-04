@@ -5,6 +5,8 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView, LogoutView
 from productos.models import Product
+from .forms import CustomUserCreationForm  # Importa tu formulario personalizado
+
 
 def index(request):
     relevant_products = Product.objects.filter(is_relevant=True)
@@ -21,7 +23,7 @@ class CustomLogoutView(LogoutView):
     
 class RegisterView(FormView):
     template_name = 'core/register.html'  # Ruta a tu plantilla personalizada
-    form_class = UserCreationForm  # Formulario que se utilizará
+    form_class = CustomUserCreationForm    # Formulario que se utilizará
     success_url = reverse_lazy('core:login')  # Redirige al login después del registro
 
     def form_valid(self, form):
