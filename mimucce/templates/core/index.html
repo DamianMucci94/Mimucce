@@ -17,7 +17,7 @@
         {% for product in products %}
         <div class="carousel-item {% if forloop.first %}active{% endif %}">
             <img src="{{ product.image.url }}" class="d-block" alt="{{ product.name }}">
-            <div class="carousel-caption d-none d-md-block">
+            <div class="carousel-caption">
                 <h5>{{ product.name }}</h5>
                 <p>{{ product.description }}</p>
                 <p><strong>Precio: ${{ product.price }}</strong></p>
